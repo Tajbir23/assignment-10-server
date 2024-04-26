@@ -3,7 +3,7 @@ const express = require('express');
 
 const port = process.env.PORT || 5000
 const cors = require('cors')
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 const app = express();
 app.use(cors());
@@ -42,6 +42,25 @@ const client = new MongoClient(uri, {
         const result = await craft.insertOne(req.body);
         console.log(result);
         res.json(result);
+      })
+
+      app.get('/category/:category', async (req, res) => {
+        console.log(req.params.category)
+        const result = await craft.find({subcategory_name: req.params.category}).toArray();
+        console.log(result);
+        res.send(result);
+      })
+
+      app.get('/six_data', async (req, res) => {
+        const result = await craft.find().limit(6).toArray();
+        console.log(result);
+        res.send(result);
+      })
+
+      app.get('/view_details/:id', async (req, res) => {
+        const result = await craft.findOne({_id: new ObjectId(req.params.id)});
+        console.log(result);
+        res.send(result);
       })
 
 
