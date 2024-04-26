@@ -27,6 +27,23 @@ const client = new MongoClient(uri, {
     //   await client.connect();
       // Send a ping to confirm a successful connection
     //   await client.db("admin").command({ ping: 1 });
+
+    const database = await client.db("art_craft")
+    const sub_categories = await database.collection('subcategory_name');
+
+      app.get('/sub_categories', async(req, res) =>{
+        const result = await sub_categories.find().toArray();
+        res.send(result);
+      })
+
+      app.post('/add_craft', async(req, res) => {
+        console.log(req.body)
+        const result = await sub_categories.insertOne(req.body);
+        console.log(result);
+        res.json(result);
+      })
+
+      
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
       // Ensures that the client will close when you finish/error
