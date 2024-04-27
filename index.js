@@ -81,6 +81,14 @@ const client = new MongoClient(uri, {
         res.send(result);
       })
 
+      app.put('/update/:id', async (req, res) => {
+        const query = {_id: new ObjectId(req.params.id)}
+        const data = req.body
+        console.log(data)
+        // const result = await craft.updateOne(query, { $set: data });
+        // console.log(result);
+        // res.send(result);
+      })
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
       // Ensures that the client will close when you finish/error
