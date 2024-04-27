@@ -69,7 +69,12 @@ const client = new MongoClient(uri, {
         res.send(result);
       })
 
-      
+      app.get('/my_art_crafts/:id', async (req, res) => {
+        const result = await craft.find({user_email: req.params.id}).toArray();
+        console.log(result);
+        res.send(result);
+      })
+
 
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
