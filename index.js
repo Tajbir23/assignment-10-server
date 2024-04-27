@@ -63,6 +63,13 @@ const client = new MongoClient(uri, {
         res.send(result);
       })
 
+      app.get('/all_art_crafts', async (req, res) => {
+        const result = await craft.find().toArray();
+        console.log(result);
+        res.send(result);
+      })
+
+      
 
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
