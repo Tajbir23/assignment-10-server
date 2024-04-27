@@ -89,6 +89,13 @@ const client = new MongoClient(uri, {
         console.log(result);
         res.send(result);
       })
+
+      app.delete('/delete/:id', async (req, res) => {
+        const query = {_id: new ObjectId(req.params.id)}
+        const result = await craft.deleteOne(query);
+        console.log(result);
+        res.send(result);
+      })
       console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
       // Ensures that the client will close when you finish/error
